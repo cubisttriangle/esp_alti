@@ -58,7 +58,7 @@ void app_main(void)
     ESP_ERROR_CHECK(esp_console_new_repl_usb_cdc(&cdc_config, &repl_config, &repl));
 #endif
 
-    register_i2ctools();
+    register_tools();
     register_system();
 
     printf("\n ==============================================================\n");
@@ -66,6 +66,7 @@ void app_main(void)
     printf("   |                                                            |\n");
     printf("   |  1. Try 'help', check all supported commands               |\n");
     printf("   |  2. Try 'alti' to print and log barometer data             |\n");
+    printf("   |  3. Try 'scan_i2c' to scan the i2c bus                     |\n");
     printf("   |                                                            |\n");
     printf("   ==============================================================\n\n");
 

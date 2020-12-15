@@ -13,7 +13,7 @@
 extern "C" {
 #endif
 
-void register_i2ctools(void);
+void register_tools(void);
 
 #ifdef __cplusplus
 }
