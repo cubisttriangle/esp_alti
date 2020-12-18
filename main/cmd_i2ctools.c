@@ -298,21 +298,8 @@ static int acquire_alti_data(struct ms5840_data* dev, int reset_device)
     return 0;
 }
 
-static int check_alti(int argc, char **argv)
+static void print_alti_results(struct ms5840_results* results)
 {
-    // Get and init alti struct.
-    struct ms5840_data alti = {};
-
-    int ret = acquire_alti_data(&alti, 1);
-    //ms5840_load_example_data(&alti);
-    if (ret != 0)
-    {
-        return ret;
-    }
-
-    struct ms5840_results results = {};
-    ms5840_calc_results(&alti, &results);
-
     float pressureMb = results.p / 100.0;
     printf("Temperature (C): %f\n", results.temp2);
     printf("Temperature (F): %f\n", (results.temp2 * 1.8) + 32.0);
@@ -324,6 +311,21 @@ static int check_alti(int argc, char **argv)
     // Convert mb to pressure altitude.
     double pressure_altitude_ft = 145366.45 * (1.0 - pow((pressureMb/1013.25), 0.190284));
     printf("Final temperature compensated altitude (ft): %lf\n", pressure_altitude_ft);
+}
+
+static int check_alti(int argc, char **argv)
+{
+    // Get and init alti structs.
+    struct ms5840_data alti = {};
+    struct ms5840_results results = {};
+
+    int ret = acquire_alti_data(&alti, 1);
+    //ms5840_load_example_data(&alti);
+    if (ret != 0)
+        return ret;
+
+    ms5840_calc_results(&alti, &results);
+    print_alti_results(&results);
 
     return 0;
 }
