@@ -194,7 +194,6 @@ static int acquire_alti_data(struct ms5840_data* dev, int reset_device)
         return -1;
     }
 
-    printf("Starting D1 (pressure) / D2 (temperature) conversions\n");
     cmd = i2c_cmd_link_create();
     i2c_master_start(cmd);
     i2c_master_write_byte(cmd, (MS5840_I2C_ADDR << 1) | WRITE_BIT, ACK_CHECK_EN);
@@ -240,7 +239,7 @@ static int acquire_alti_data(struct ms5840_data* dev, int reset_device)
         i2c_driver_delete(i2c_port);
         return -1;
     } else {
-        printf("D1 = %d\n", dev->d1);
+        printf("D1 (pressure) = %d\n", dev->d1);
     }
 
     // D2 - temperature reading
@@ -291,7 +290,7 @@ static int acquire_alti_data(struct ms5840_data* dev, int reset_device)
         i2c_driver_delete(i2c_port);
         return -1;
     } else {
-        printf("D2 = %d\n", dev->d2);
+        printf("D2 (temperature) = %d\n", dev->d2);
     }
 
     i2c_driver_delete(i2c_port);
@@ -315,12 +314,12 @@ static int check_alti(int argc, char **argv)
     ms5840_calc_results(&alti, &results);
 
     float pressureMb = results.p / 100.0;
-    printf("Final temperature (C): %d\n", results.temp2);
-    printf("Final temperature (F): %f\n", (results.temp2 * 1.8) + 32.0);
-    printf("Final offset pressure: %lld\n", results.off2);
-    printf("Final sensitivity: %lld\n", results.sens2);
-    printf("Final temperature compensated pressure: %d\n", results.p);
-    printf("Final temperature compensated pressure (mb): %lf\n", pressureMb);
+    printf("Temperature (C): %f\n", results.temp2);
+    printf("Temperature (F): %f\n", (results.temp2 * 1.8) + 32.0);
+    printf("Offset pressure: %lld\n", results.off2);
+    printf("Sensitivity: %lld\n", results.sens2);
+    printf("Temperature compensated pressure: %d\n", results.p);
+    printf("Temperature compensated pressure (mb): %lf\n", pressureMb);
 
     // Convert mb to pressure altitude.
     double pressure_altitude_ft = 145366.45 * (1.0 - pow((pressureMb/1013.25), 0.190284));
