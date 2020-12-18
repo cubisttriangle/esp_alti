@@ -45,7 +45,7 @@ struct ms5840_results
     int64_t sensi;
 
     // Final calculations
-    int32_t temp2;
+    float temp2;
     int64_t off2;
     int64_t sens2;
 };

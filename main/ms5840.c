@@ -38,7 +38,7 @@ void ms5840_calc_results(struct ms5840_data* dev, struct ms5840_results* results
     }
 
     // Final calculations
-    results->temp2 = (results->temp - results->ti) / 100;
+    results->temp2 = (results->temp - results->ti) / 100.0;
     results->off2 = results->off - results->offi;
     results->sens2 = results->sens - results->sensi;
 }
