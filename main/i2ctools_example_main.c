@@ -65,8 +65,9 @@ void app_main(void)
     printf("   |             Steps to use esp-alti                          |\n");
     printf("   |                                                            |\n");
     printf("   |  1. Try 'help', check all supported commands               |\n");
-    printf("   |  2. Try 'alti' to print and log barometer data             |\n");
-    printf("   |  3. Try 'scan_i2c' to scan the i2c bus                     |\n");
+    printf("   |  2. Try 'scan_i2c' to scan the i2c bus                     |\n");
+    printf("   |  3. Try 'alti' to print barometer data                     |\n");
+    printf("   |  4. Try 'gps' to print gps data                            |\n");
     printf("   |                                                            |\n");
     printf("   ==============================================================\n\n");
 
